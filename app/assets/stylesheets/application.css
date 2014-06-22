@@ -54,9 +54,7 @@ header {
 
 .voffset4 { margin-top: 30px; }
 
-
 .actions > div {float: left; margin-right: 10px;}
-
 
 nav ul {
     list-style: none outside none;
@@ -110,10 +108,20 @@ div.ajax-loader {
     left: 5px;  
 }
 
-.errors li { color: red; margin-bottom: 5px;}
+.errors li { color: red; margin-bottom: 5px; }
 
-.border {border-bottom: 2px solid #ccc;}
+.border { border-bottom: 2px solid #ccc; }
 
 .buttons div { float: left; margin-right: 15px;}
 
 .data h1 { margin-bottom: 30px; }
+
+a.app-menu-selected {
+    text-decoration: none;
+    padding: 5px;
+    font-size: 15px;
+    width: 100%;
+    display: block;
+    color: #00518F;
+    background-color: #C5D9EB;
+}

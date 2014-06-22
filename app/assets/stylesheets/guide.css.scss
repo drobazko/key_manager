@@ -1,0 +1,11 @@
+// Place all the styles related to the Guide controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.guide {
+    list-style-type: circle !important;
+}
+
+.guide li {
+	margin-bottom: 10px;
+}

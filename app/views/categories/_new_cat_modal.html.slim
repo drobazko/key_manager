@@ -1,0 +1,21 @@
+div[class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"]
+  div[class="modal-dialog"]
+    div[class="modal-content"]
+      div[class="modal-header"]
+        button[type="button" class="close" data-dismiss="modal" aria-hidden="true"] &times;
+        h4[class="modal-title" id="myModalLabel"] #{action_name == 'new' ? 'New Category' : 'Edit Category'}
+      
+      div[class="modal-body"]
+        div[class="errors"]
+
+        div
+          = form_for @category, remote: true do |f|
+            div[class="voffset4"]
+              div
+                = f.label :title, 'Category Title'
+              div
+                = f.text_field :title
+
+            div[class="voffset4"]
+              = f.submit "Save", class: 'btn btn-primary', type: 'submit'
+        

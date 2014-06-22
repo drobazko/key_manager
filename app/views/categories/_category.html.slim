@@ -1,0 +1,11 @@
+div
+	= form_for category do |f|
+		div[class="cat-title"] #{category.title}
+
+	- if category.user_id
+		div[class="actions"]
+			div
+				div = link_to '[edit]', edit_category_path(category), remote: true
+			div
+				div = link_to '[delete]', category_path(category), method: :delete, data: { confirm: 'Are you sure?', remote: true }
+

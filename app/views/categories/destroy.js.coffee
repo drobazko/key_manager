@@ -1,0 +1,1 @@
+$('#edit_category_<%= @category.id %>').closest('div').fadeOut('slow');

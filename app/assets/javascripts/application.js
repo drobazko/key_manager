@@ -45,4 +45,13 @@ $(function() {
     $(".red-button").css('background-image','none').css('background-color','#FF0000');
 
     $('.datepicker').datepicker();
+
+    $('#q').autocomplete({
+        serviceUrl:'/credentials/suggestions',
+        onSelect: function(value, data){ 
+            //$("#sugg_form input").remove();
+            $("#sugg_form").attr('action', '/credentials/' + data).submit();
+        }
+    });
+
 });

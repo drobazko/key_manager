@@ -8,6 +8,8 @@ html
 
 		= csrf_meta_tags
 	body
+		div[class="modal-place"]
+
 		div[class="clear-float hide-me ajax-loader"]
 			div[class="to-left"]
 				= image_tag "ajax-loader.gif"			
@@ -33,28 +35,33 @@ html
 						div
 							= link_to 'Load Master Key', key_path
 
-					div
+					- if session[:master_key]
 						div[class="voffset4"]
-							= link_to "New Password", new_credential_path, class: 'btn btn-primary'
+							div[class="to-left"]
+								= link_to "New Password", new_credential_path, class: 'btn btn-primary'
+							div[class="to-left" style="margin-left: 40px;"]
+								= form_tag nil, id: "sugg_form", method: :get
+									= text_field_tag :q, params[:q], placeholder: "start typing..."
+
 
 			div[class="row voffset4"]
 				div[class="menu to-left span3"]
 					nav
 						ul
 							li
-								= link_to "All", credentials_path(cat: :all)
+								= link_to "All", credentials_path(cat: :all), class: "#{'app-menu-selected' if params[:cat] == 'all'}"
 
 							- Category.all.each do |category|
 								li
-									= link_to category.title, credentials_path(cat: category.id)
+									= link_to category.title, credentials_path(cat: category.id), class: "#{'app-menu-selected' if params[:cat].to_i == category.id}"
 
 							li
 								div[class="border"]	
 							li
-								= link_to "Guide"
+								= link_to "Guide", guide_path, class: "#{'app-menu-selected' if controller_name == 'guide'}"
 
 							li
-								= link_to "Manage Categories"
+								= link_to "Manage Categories", categories_path, class: "#{'app-menu-selected' if controller_name == 'categories'}"
 
 
 				div[class="to-left span9 data"]

@@ -1,5 +1,6 @@
 class CredentialsController < ApplicationController
   before_filter :authenticate_user!, :load_key!, :default_category
+  before_filter :load_data, only: [:show, :edit, :update, :destroy, :open_link]
 
   def index
     @credentials = current_user.credentials
@@ -8,8 +9,6 @@ class CredentialsController < ApplicationController
   end
 
   def show
-    @credential = current_user.credentials.find(params[:id])
-    @credential.encryption_key = session[:master_key]
   end
 
   def new
@@ -29,14 +28,9 @@ class CredentialsController < ApplicationController
   end
 
   def edit
-    @credential = current_user.credentials.find(params[:id])
-    @credential.encryption_key = session[:master_key]
   end
 
   def update
-    @credential = current_user.credentials.find(params[:id])
-    @credential.encryption_key = session[:master_key]
-
     if @credential.update(credential_params)
       redirect_to credential_path(@credential), notice: "Password entry changed successfully"
     else
@@ -45,15 +39,11 @@ class CredentialsController < ApplicationController
   end
 
   def destroy
-    @credential = current_user.credentials.find(params[:id])
     @credential.destroy
     redirect_to credentials_path, notice: "Password Entry was removed successfully"
   end
 
   def open_link
-    @credential = current_user.credentials.find(params[:id])
-    @credential.encryption_key = session[:master_key]
-   
     result = open_url
     if result.class == String
       redirect_to credential_path(@credential), notice: "Redirect Link Failed: #{result}"
@@ -72,6 +62,29 @@ class CredentialsController < ApplicationController
       format.csv  { render csv: @credentials, only: [:name, :login, :password] }
       format.pdf { send_data ExportPdf.new(@credentials, session[:master_key]).render, filename: 'key_export.pdf' }
     end
+  end
+
+
+  def suggestions
+    @tikets = Credential.where("name like ?", "#{params[:query]}%")
+
+    suggestions = []
+    data = []
+    @tikets.each{|v|
+      suggestions << v[:name]
+      data << v[:id]
+    }
+
+    res = {
+      'query' => 'Li',
+      'suggestions' => suggestions,
+      'data' => data
+    }
+
+    render :text => res.to_json
+  end
+
+  def search
   end
 
   private
@@ -119,7 +132,10 @@ class CredentialsController < ApplicationController
       rescue Exception => e
         e.message
       end
-     
     end
 
+    def load_data
+      @credential = current_user.credentials.find(params[:id])
+      @credential.encryption_key = session[:master_key]
+    end
 end

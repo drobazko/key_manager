@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-
-  root 'credentials#index'
+  root 'guide#index'
 
   devise_for :users
   resources :credentials do
     collection do
       get :export
+      get :suggestions
     end
 
     member do
@@ -13,10 +13,14 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :categories
+
   post 'key/upload' => 'key#upload', as: :upload_key
   get 'key/download' => 'key#download', as: :download_key
   get 'key/generate' => 'key#generate', as: :generate_key
   get 'key' => 'key#get', as: :key
+  get 'guide' => 'guide#index', as: :guide
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

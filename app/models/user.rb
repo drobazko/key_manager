@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :credentials
+  has_many :categories
 
   def you
   	"You are <b>#{email}</b>"
