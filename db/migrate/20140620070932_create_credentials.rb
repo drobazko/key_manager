@@ -8,7 +8,8 @@ class CreateCredentials < ActiveRecord::Migration
 		t.text :comment
     	t.string :encrypted_password
     	t.string :encrypted_login
-        t.datetime :expiration_date
+        t.date :expiration_date
+        t.integer :is_notified, default: 0
 
 		t.timestamps
     end

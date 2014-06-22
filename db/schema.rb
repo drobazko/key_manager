@@ -22,12 +22,13 @@ ActiveRecord::Schema.define(version: 20140621221734) do
   create_table "credentials", force: true do |t|
     t.string   "login"
     t.string   "password"
-    t.string   "name",               null: false
+    t.string   "name",                           null: false
     t.string   "link"
     t.text     "comment"
     t.string   "encrypted_password"
     t.string   "encrypted_login"
-    t.datetime "expiration_date"
+    t.date     "expiration_date"
+    t.integer  "is_notified",        default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_id"

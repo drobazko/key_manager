@@ -44,5 +44,5 @@ $(function() {
 
     $(".red-button").css('background-image','none').css('background-color','#FF0000');
 
-    $('.datepicker').datepicker()
+    $('.datepicker').datepicker();
 });

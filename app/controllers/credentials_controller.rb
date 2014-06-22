@@ -4,6 +4,7 @@ class CredentialsController < ApplicationController
   def index
     @credentials = current_user.credentials
     @credentials = @credentials.where(category_id: params[:cat]) unless params[:cat] == 'all'
+    @credentials.order(updated_at: :desc)
   end
 
   def show
@@ -82,6 +83,17 @@ class CredentialsController < ApplicationController
     end
 
     def credential_params
+      # hard patch
+      if params[:credential][:expiration_date]
+        #params[:credential][:expiration_date] = params[:credential][:expiration_date].to_date.strftime("%Y-%m-%d")
+        
+        if params[:credential][:expiration_date].include?('/')
+          d = params[:credential][:expiration_date].split('/')
+          params[:credential].delete(:expiration_date)
+          params[:credential][:expiration_date] = "#{d[2]}-#{d[0]}-#{d[1]}"
+        end
+      end
+
       params[:credential].delete_if {|k,v| v.blank?}
       params.require(:credential).permit(:name, :login, :password, :link, :comment, :expiration_date, :category_id)
     end
