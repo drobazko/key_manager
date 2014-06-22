@@ -34,4 +34,13 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options   = { :host => 'localhost:3000' }
+  config.action_mailer.delivery_method       = :postmark
+  config.action_mailer.postmark_settings     = { :api_key => '21f4c72d-0f9e-4b35-9a5f-154e55a9295a' }
+
+  ActionMailer::Base.default :from => 'info@stockox.com'  
+
+  config.action_mailer.asset_host = "http://127.0.0.1:3000"   
 end

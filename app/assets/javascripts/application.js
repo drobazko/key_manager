@@ -11,6 +11,38 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap
+//= require bootstrap-datepicker
 //= require_tree .
+
+$(function() {
+    $('.remote')
+        .on('ajax:before', function(){
+            $('.ajax-loader').show();
+        })
+        .on('ajax:success', function(data, status, xhr) {
+            $('.ajax-loader').hide();
+        })
+        .on('ajax:failure', function(xhr, status, error) {
+        })
+        .on('ajax:complete', function() {
+            $('.ajax-loader').hide();
+        });
+
+
+    $(".edit_staff input, .edit_staff select").on("change", function(){
+        $(this).closest('form').submit();
+    });
+
+    $('.pass-toggle-show a').on('click', function(e){
+        e.preventDefault();
+        $(this).closest('.pass').find(".pass-toggle, .pass-toggle-show").toggle();
+    });
+
+    $(".red-button").css('background-image','none').css('background-color','#FF0000');
+
+    $('.datepicker').datepicker()
+});

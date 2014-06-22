@@ -1,0 +1,69 @@
+doctype html
+html
+	head
+		title Key Manager
+
+		= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+		= javascript_include_tag "application", "data-turbolinks-track" => true
+
+		= csrf_meta_tags
+	body
+		div[class="clear-float hide-me ajax-loader"]
+			div[class="to-left"]
+				= image_tag "ajax-loader.gif"			
+			
+			div[class="to-left loading"]
+				| loading...
+		
+		header[class="nav-bar"]
+			h1 Key Manager
+		div[class="container"]
+			div[class="row"]
+				div[class="span12 voffset4"]
+					div
+						- unless current_user
+							= link_to 'Sign in', new_user_session_path
+						- else
+							div
+								| #{current_user.you.html_safe}: / #{link_to 'Sign out', destroy_user_session_path, method: :delete}
+								- unless session[:master_key] 
+									| / #{link_to 'Load Master Key', key_path}
+									
+					- unless session[:master_key]
+						div
+							= link_to 'Load Master Key', key_path
+
+					div
+						div[class="voffset4"]
+							= link_to "New Password", new_credential_path, class: 'btn btn-primary'
+
+			div[class="row voffset4"]
+				div[class="menu to-left span3"]
+					nav
+						ul
+							li
+								= link_to "All", credentials_path(cat: :all)
+
+							- Category.all.each do |category|
+								li
+									= link_to category.title, credentials_path(cat: category.id)
+
+							li
+								div[class="border"]	
+							li
+								= link_to "Guide"
+
+							li
+								= link_to "Manage Categories"
+
+
+				div[class="to-left span9 data"]
+					div[class="voffset4"]
+						div
+							p[class="notice"]
+						   		= notice
+							p[class="notice"]
+								= alert
+
+					= yield
+

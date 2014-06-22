@@ -1,0 +1,27 @@
+h1 Load The Master Key
+
+div[class="mk-content"]
+	- unless session[:master_key]
+		= form_tag upload_key_path, method: :post, remote: true, class: :remote
+			div[class="msg bold"]
+
+			div
+				= label_tag :master_key, 'The Master Key'
+			div
+				= password_field_tag :master_key
+
+			div
+				= link_to("generate", generate_key_path, remote: true )
+
+			div[class="key-gen bold"]
+				#{render('load_link') if session[:master_key_tmp]}
+
+			div
+				div[class="voffset4"]
+					= button_tag "Load The Key", class: 'btn btn-primary', type: 'submit'
+	- else
+		= render 'success'
+
+
+
+

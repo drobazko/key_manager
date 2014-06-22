@@ -1,7 +1,22 @@
 Rails.application.routes.draw do
 
-  resources :credentials
-  
+  root 'credentials#index'
+
+  devise_for :users
+  resources :credentials do
+    collection do
+      get :export
+    end
+
+    member do
+      get :open_link
+    end
+  end
+
+  post 'key/upload' => 'key#upload', as: :upload_key
+  get 'key/download' => 'key#download', as: :download_key
+  get 'key/generate' => 'key#generate', as: :generate_key
+  get 'key' => 'key#get', as: :key
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
