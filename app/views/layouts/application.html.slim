@@ -18,23 +18,52 @@ html
 				| loading...
 		
 		header[class="nav-bar"]
-			h1 Key Manager
+			div[class="container"]
+				div[class="row"]
+					h1
+						em KeyManager
+
+				div[class="row main-menu voffset4"]
+					div[class="to-left"]
+						= link_to "Guide", guide_path, class: "#{'app-menu-selected' if controller_name == 'guide'}"
+
+					div[class="to-left"]
+						= link_to "Manage Categories", categories_path, class: "#{'app-menu-selected' if controller_name == 'categories'}"
+
+					- if current_user
+						div[class="to-left"]
+							div[class="btn-group" style="top: -5px;"]
+						      button[class="btn btn-success" type="button"] #{(!params[:cat] or params[:cat] == 'all') ?  'All' : Category.find(params[:cat]).title  }
+						      button[data-toggle="dropdown" class="btn btn-success dropdown-toggle" type="button"]
+						        span[class="caret"]
+						        span[class="sr-only"]
+						      
+						      ul[role="menu" class="dropdown-menu"]
+								li
+									= link_to "All", credentials_path(cat: :all)
+								- Category.all.each do |category|
+									li
+										= link_to category.title, credentials_path(cat: category.id)
+
+					div[class="keys"]
+						- unless session[:master_key]
+							div[class="to-left"]
+								b
+									= link_to 'Load Master Key', key_path
+
+						- unless current_user
+							div[class="to-left"]
+								= link_to 'Sign in', new_user_session_path
+						- else
+							div[class="to-left"]
+								| #{current_user.you.html_safe}: / #{link_to 'Sign out', destroy_user_session_path, method: :delete}
+	      
+		
 		div[class="container"]
 			div[class="row"]
 				div[class="span12 voffset4"]
 					div
-						- unless current_user
-							= link_to 'Sign in', new_user_session_path
-						- else
-							div
-								| #{current_user.you.html_safe}: / #{link_to 'Sign out', destroy_user_session_path, method: :delete}
-								- unless session[:master_key] 
-									| / #{link_to 'Load Master Key', key_path}
 									
-					- unless session[:master_key]
-						div
-							= link_to 'Load Master Key', key_path
-
 					- if session[:master_key]
 						div[class="voffset4"]
 							div[class="to-left"]
@@ -44,27 +73,7 @@ html
 									= text_field_tag :q, params[:q], placeholder: "start typing..."
 
 
-			div[class="row voffset4"]
-				div[class="menu to-left span3"]
-					nav
-						ul
-							li
-								= link_to "All", credentials_path(cat: :all), class: "#{'app-menu-selected' if params[:cat] == 'all'}"
-
-							- Category.all.each do |category|
-								li
-									= link_to category.title, credentials_path(cat: category.id), class: "#{'app-menu-selected' if params[:cat].to_i == category.id}"
-
-							li
-								div[class="border"]	
-							li
-								= link_to "Guide", guide_path, class: "#{'app-menu-selected' if controller_name == 'guide'}"
-
-							li
-								= link_to "Manage Categories", categories_path, class: "#{'app-menu-selected' if controller_name == 'categories'}"
-
-
-				div[class="to-left span9 data"]
+				div[class="to-left span12 data"]
 					div[class="voffset4"]
 						div
 							p[class="notice"]

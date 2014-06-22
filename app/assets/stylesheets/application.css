@@ -125,3 +125,12 @@ a.app-menu-selected {
     color: #00518F;
     background-color: #C5D9EB;
 }
+
+.nav-bar { width: 100%; }
+
+.main-menu > div { margin-right: 20px; }
+
+.nav-bar a { color: white; }
+
+.keys { float: right }
+.keys > div { margin-right: 20px; }
