@@ -48,11 +48,11 @@ header {
 
 .to-left { float: left; }
 
-.spacer {margin: 5px;}
-
 .voffset2 { margin-top: 10px; }
 
 .voffset4 { margin-top: 30px; }
+
+.voffset6 { margin-top: 60px; }
 
 .actions > div {float: left; margin-right: 10px;}
 
@@ -134,3 +134,9 @@ a.app-menu-selected {
 
 .keys { float: right }
 .keys > div { margin-right: 20px; }
+
+.spacer { border-bottom: 1px solid #ccc; }
+
+.footer { margin-top: 60px; border-top: 2 px solid #ccc; }
+
+.margin > div { margin-right: 5px;}

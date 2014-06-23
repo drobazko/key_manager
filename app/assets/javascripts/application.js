@@ -49,9 +49,14 @@ $(function() {
     $('#q').autocomplete({
         serviceUrl:'/credentials/suggestions',
         onSelect: function(value, data){ 
-            //$("#sugg_form input").remove();
             $("#sugg_form").attr('action', '/credentials/' + data).submit();
         }
+    });
+
+    $('.more').on('click', function(e){
+        e.preventDefault();
+        $(this).parent().find('a').toggle();
+        $(this).parent().parent().find('.additives').slideToggle();
     });
 
 });

@@ -1,4 +1,4 @@
-$('.mk-content').html("<%= render 'success' %>");
+$('.mk-content').html("<%= j render 'success' %>");
 $('.ajax-loader').hide();
 
 

@@ -24,16 +24,10 @@ html
 						em KeyManager
 
 				div[class="row main-menu voffset4"]
-					div[class="to-left"]
-						= link_to "Guide", guide_path, class: "#{'app-menu-selected' if controller_name == 'guide'}"
-
-					div[class="to-left"]
-						= link_to "Manage Categories", categories_path, class: "#{'app-menu-selected' if controller_name == 'categories'}"
-
 					- if current_user
 						div[class="to-left"]
 							div[class="btn-group" style="top: -5px;"]
-						      button[class="btn btn-success" type="button"] #{(!params[:cat] or params[:cat] == 'all') ?  'All' : Category.find(params[:cat]).title  }
+						      button[class="btn btn-success" type="button"] Select Pass Category
 						      button[data-toggle="dropdown" class="btn btn-success dropdown-toggle" type="button"]
 						        span[class="caret"]
 						        span[class="sr-only"]
@@ -44,6 +38,8 @@ html
 								- Category.all.each do |category|
 									li
 										= link_to category.title, credentials_path(cat: category.id)
+
+					= render '/shared/guide'
 
 					div[class="keys"]
 						- unless session[:master_key]
@@ -70,7 +66,7 @@ html
 								= link_to "New Password", new_credential_path, class: 'btn btn-primary'
 							div[class="to-left" style="margin-left: 40px;"]
 								= form_tag nil, id: "sugg_form", method: :get
-									= text_field_tag :q, params[:q], placeholder: "start typing..."
+									= text_field_tag :q, params[:q], placeholder: "search entries..."
 
 
 				div[class="to-left span12 data"]
@@ -82,4 +78,14 @@ html
 								= alert
 
 					= yield
+
+			- if current_user and session[:master_key]
+				div[class="row"]
+					div[class="span12 footer"]
+						div
+							= Category.all.map {|c| link_to(c.title, category_path(c))}.join(' | ').html_safe
+						div[class="margin"]
+							= render '/shared/guide'
+						
+
 
