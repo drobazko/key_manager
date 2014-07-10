@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails'
+gem 'rails', '4.1.1'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # Use SCSS for stylesheets
@@ -55,3 +55,12 @@ gem 'mechanize'
 gem 'prawn'
 gem 'render_csv', '~> 2.0.0'
 gem 'capistrano', '~> 3.2.0'
+
+group :development, :test do
+  gem "capybara", "2.2.1"
+  gem "cucumber-rails",     "~> 1.3.0", require: false 
+  gem 'rspec-rails', '~> 3.0.0'
+  gem "factory_girl_rails", "~> 4.1.0"
+end
+
+gem 'hirb', group: :development
