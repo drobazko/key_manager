@@ -6,10 +6,14 @@ FactoryGirl.define do
 
 	factory :invalid_user, parent: :user do
 		email nil
+		password nil
 	end
 
-	# This will use the User class (Admin would have been guessed)
-	factory :admin, class: User do
-	first_name "Admin"
+	factory :category do
+		title "My Test Category"
+	end
+
+	factory :invalid_category, parent: :category do
+		title "My Test Category"
 	end
 end
