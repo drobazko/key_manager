@@ -49,7 +49,6 @@ describe CategoriesController, :type => :controller do
 			end
 
 			context "with valid attributes" do
-
 				it "located the requested @contact" do 
 					put :update, format: :js, id: @category, category: FactoryGirl.attributes_for(:category) 
 					expect(assigns(:category)).to eq(@category)
