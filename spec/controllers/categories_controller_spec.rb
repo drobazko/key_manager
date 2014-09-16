@@ -21,8 +21,9 @@ describe CategoriesController, :type => :controller do
 		end
 
 		it "GET #index: assign a categories list" do
+				categories = Category.list(@current_user)
 	      get :index
-	      expect(assigns(:categories)).to eq([])
+	      expect(assigns(:categories)).to eq(categories)
 		end
 
 		describe "POST create" do
