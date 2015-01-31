@@ -1,28 +1,13 @@
-== README
+== KEY MANAGER
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The password wallet web application. Customers are able to sign up for service for free, and store all their passwords for all his or her accounts in a secure and simple manner.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Key Manager supports an ecryption of your login and password
+* Nobody can get an access to your login and password
+* Using one master key you can encrypt the password and login
+* The password list can be exported to formats like PDF and CSV
+* Key Maneger supports time fields: creation time, last modification time, and expiration time
+* Key Maneger sends a notification letter after expiration time
+* Key Maneger supports an auto filling fields in authentication forms with login and password (yahoo.com etc)
+* You can search for specific entries in the databases
+* You can create, modify and delete groups, in which passwords can be sorted into
