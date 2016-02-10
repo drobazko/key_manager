@@ -1,32 +1,35 @@
 h1 Guide
 
 -if !session[:master_key] or !current_user
-	div[class="voffset4"]
-		| Before you are getting started You need to:
-		
-		div
-			- unless current_user
-				div
-					= link_to 'Sign in', new_user_session_path
+  div[class="voffset4"]
+    b
+      | Before you are getting started you need to:
+    
+    div
+      - unless current_user
+        div
+          | 1)&nbsp;
+          = link_to 'Sign in', new_user_session_path
 
-		div
-			- unless session[:master_key]
-				div
-					= link_to 'Load Master Key', key_path
+    div
+      - unless session[:master_key]
+        div
+          = '2)&nbsp;'.html_safe unless current_user
+          = link_to 'Load Master Key', key_path
 
 h3 Features
 
 div
-	ul[class="guide"]
-		li Key Manager supports an ecryption of your login and password
-		li Nobody can get an access to your login and password
-		li Using one master key you can encrypt the password and login
-		li The password list can be exported to formats like PDF and CSV
-		li Key Maneger supports time fields: creation time, last modification time, and expiration time
-		li Key Maneger sends a notification letter after expiration time
-		li Key Maneger supports an auto filling fields in authentication forms with login and password (yahoo.com etc)
-		li You can search for specific entries in the databases
-		li You can create, modify and delete groups, in which passwords can be sorted into
+  ul[class="guide"]
+    li Key Manager supports an ecryption of your login and password
+    li Nobody can get an access to your login and password
+    li Using one master key you can encrypt the password and login
+    li The password list can be exported to formats like PDF and CSV
+    li Key Maneger supports time fields: creation time, last modification time, and expiration time
+    li Key Maneger sends a notification letter after expiration time
+    li Key Maneger supports an auto filling fields in authentication forms with login and password (yahoo.com etc)
+    li You can search for specific entries in the databases
+    li You can create, modify and delete groups, in which passwords can be sorted into
 
 
 

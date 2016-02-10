@@ -8,6 +8,6 @@ class User < ActiveRecord::Base
   has_many :categories
 
   def you
-  	"<b>#{email}</b>"
+    "<b>#{email}</b>"
   end
 end

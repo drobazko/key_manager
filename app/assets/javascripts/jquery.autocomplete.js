@@ -72,7 +72,7 @@
           me.disableKillerFn();
         }
       };
-	  
+    
       if (!this.options.width) { this.options.width = this.el.width(); }
       this.mainContainerId = 'AutocompleteContainter_' + uid;
 
@@ -230,8 +230,8 @@
     },
     
     getSuggestions: function(q) {
-	  $('#ajax-loader-img, .ajax-loader').show();
-	  
+    $('#ajax-loader-img, .ajax-loader').show();
+    
       var cr, me;
       cr = this.isLocal ? this.getSuggestionsLocal(q) : this.cachedResponse[q];
       if (cr && $.isArray(cr.suggestions)) {
@@ -285,15 +285,15 @@
     },
 
     processResponse: function(text) {
-	  $('#ajax-loader-img, .ajax-loader').hide();
+    $('#ajax-loader-img, .ajax-loader').hide();
       var response;
       try {
         response = eval('(' + text + ')');
-	
+  
       } catch (err) { return; }
 
       if (!$.isArray(response.data)) { response.data = []; }
-	  
+    
       if(!this.options.noCache){
         this.cachedResponse[response.query] = response;
         if (response.suggestions.length === 0) { this.badQueries.push(response.query); }
@@ -382,7 +382,7 @@
       s = me.suggestions[i];
       d = me.data[i];
       //me.el.val(me.getValue(s));
-	  
+    
       if ($.isFunction(fn)) { fn(s, d, me.el); }
     },
     

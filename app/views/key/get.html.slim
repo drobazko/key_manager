@@ -1,26 +1,25 @@
 h1 Load The Master Key
+- if params[:show_msg] == 'yes'
+  p[style="margin-bottom: 20px;"] The master has been generated and sent to your email. Copy and paste the master key from the letter into `The master key` field.
 
 div[class="mk-content"]
-	- unless session[:master_key]
-		= form_tag upload_key_path, method: :post, remote: true, class: :remote
-			div[class="msg bold"]
+  - unless session[:master_key]
+    = form_tag upload_key_path, method: :post, remote: true, class: :remote
+      div[class="msg bold"]
 
-			div
-				= label_tag :master_key, 'The Master Key'
-			div
-				= password_field_tag :master_key
+      div
+        = label_tag :master_key, 'The Master Key'
+      div
+        = password_field_tag :master_key
 
-			div
-				= link_to("generate", generate_key_path, remote: true )
+      div
+        = link_to("Send key again", send_key_path)
 
-			div[class="key-gen bold"]
-				#{render('load_link') if session[:master_key_tmp]}
-
-			div
-				div[class="voffset4"]
-					= button_tag "Load The Key", class: 'btn btn-primary', type: 'submit'
-	- else
-		= render 'success'
+      div
+        div[class="voffset4"]
+          = button_tag "Load The Key", class: 'btn btn-primary', type: 'submit'
+  - else
+    = render 'success'
 
 
 

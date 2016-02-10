@@ -35,12 +35,18 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options   = { :host => 'http://50.116.55.16:3000/' }
-  config.action_mailer.delivery_method       = :postmark
-  config.action_mailer.postmark_settings     = { :api_key => '21f4c72d-0f9e-4b35-9a5f-154e55a9295a' }
+  config.action_mailer.default_url_options   = { :host => 'localhost:3000' }
+  config.action_mailer.asset_host = "http://localhost:3000"
 
-  ActionMailer::Base.default :from => 'info@stockox.com'  
-
-  config.action_mailer.asset_host = "http://50.116.55.16:3000/"   
+  ActionMailer::Base.smtp_settings = {
+    :address   => 'smtp.gmail.com',
+    :port      => 587,
+    :domain    => 'gmail.com',
+    :user_name => 'drobazko.dev@gmail.com',
+    :password  => Rails.application.secrets.gmail_pass,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
 end

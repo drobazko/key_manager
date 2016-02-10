@@ -44,7 +44,6 @@ gem 'faker', '1.0.1'
 gem 'jdbc-mysql', '5.1.28', :platform => :jruby
 gem 'thinking-sphinx', '~> 3.1.0'
 gem 'kaminari'
-gem 'postmark-rails', '~> 0.5.0' 
 gem 'slim-rails'
 gem 'strong_password', '~> 0.0.3'
 gem 'jquery-turbolinks'

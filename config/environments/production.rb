@@ -20,7 +20,7 @@ Rails.application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -80,4 +80,24 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options   = { :host => ENV["key_manager_heroku_host"] }
+  config.action_mailer.asset_host = "https://#{ENV["key_manager_heroku_host"]}" 
+
+  ActionMailer::Base.smtp_settings = {
+    :address   => 'smtp.gmail.com',
+    :port      => 587,
+    :domain    => 'gmail.com',
+    :user_name => 'drobazko.dev@gmail.com',
+    :password  => ENV["gmail_pass"],
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+
+  ActionMailer::Base.default from: 'drobazko.dev@gmail.com'
+
+  # Heroku patch
+  secrets.secret_key_base = ENV["key_manager_secret_key_base"]
 end

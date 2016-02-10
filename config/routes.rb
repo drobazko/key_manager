@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root 'guide#index'
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
+  
   resources :credentials do
     collection do
       get :export
@@ -16,8 +17,7 @@ Rails.application.routes.draw do
   resources :categories
 
   post 'key/upload' => 'key#upload', as: :upload_key
-  get 'key/download' => 'key#download', as: :download_key
-  get 'key/generate' => 'key#generate', as: :generate_key
+  get 'key/send_key' => 'key#send_key', as: :send_key
   get 'key' => 'key#get', as: :key
   get 'guide' => 'guide#index', as: :guide
 

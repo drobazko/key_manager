@@ -16,15 +16,15 @@ Category.create!(title: 'Miscellaneous')
 
 # my user
 user = User.create!(
-	email: 'drobazko@gmail.com', 
-	password: '12345678', 
-	password_confirmation: '12345678', 
+  email: 'drobazko@gmail.com', 
+  password: '12345678', 
+  password_confirmation: '12345678', 
 )
 
 # arbitrary user
 User.create!(
-	email: 'user@keymng.com', 
-	password: '12345678', 
-	password_confirmation: '12345678', 
+  email: 'user@keymng.com', 
+  password: '12345678', 
+  password_confirmation: '12345678', 
 )
 

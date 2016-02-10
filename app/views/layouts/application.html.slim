@@ -1,91 +1,94 @@
 doctype html
 html
-	head
-		title Key Manager
+  head
+    title Key Manager
 
-		= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-		= javascript_include_tag "application", "data-turbolinks-track" => true
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
 
-		= csrf_meta_tags
-	body
-		div[class="modal-place"]
+    = csrf_meta_tags
+  body
+    div[class="modal-place"]
 
-		div[class="clear-float hide-me ajax-loader"]
-			div[class="to-left"]
-				= image_tag "ajax-loader.gif"			
-			
-			div[class="to-left loading"]
-				| loading...
-		
-		header[class="nav-bar"]
-			div[class="container"]
-				div[class="row"]
-					h1
-						em KeyManager
+    div[class="clear-float hide-me ajax-loader"]
+      div[class="to-left"]
+        = image_tag "ajax-loader.gif"      
+      
+      div[class="to-left loading"]
+        | loading...
+    
+    header[class="nav-bar"]
+      div[class="container"]
+        div[class="row"]
+          h1
+            em
+              = link_to 'KeyManager', root_path, class: :logo
 
-				div[class="row main-menu voffset4"]
-					- if current_user
-						div[class="to-left"]
-							div[class="btn-group" style="top: -5px;"]
-						      button[class="btn btn-success" type="button"] Select Pass Category
-						      button[data-toggle="dropdown" class="btn btn-success dropdown-toggle" type="button"]
-						        span[class="caret"]
-						        span[class="sr-only"]
-						      
-						      ul[role="menu" class="dropdown-menu"]
-								li
-									= link_to "All", credentials_path(cat: :all)
-								- Category.all.each do |category|
-									li
-										= link_to category.title, credentials_path(cat: category.id)
+        div[class="row main-menu voffset4"]
+          - if current_user
+            div[class="to-left"]
+              div[class="btn-group" style="top: -5px;"]
+                  button[class="btn btn-success" type="button"] Select Pass Category
+                  button[data-toggle="dropdown" class="btn btn-success dropdown-toggle" type="button"]
+                    span[class="caret"]
+                    span[class="sr-only"]
+                  
+                  ul[role="menu" class="dropdown-menu"]
+                    li
+                      = link_to "All", credentials_path(cat: :all)
+                    - Category.all.each do |category|
+                      li
+                        = link_to category.title, credentials_path(cat: category.id)
 
-					= render '/shared/guide'
+          = render '/shared/guide'
 
-					div[class="keys"]
-						- unless session[:master_key]
-							div[class="to-left"]
-								b
-									= link_to 'Load Master Key', key_path
+          div[class="keys"]
+            div[class="to-left"]
+              - unless current_user
+                | 1)&nbsp;
+                = link_to 'Sign in', new_user_session_path
+              - else
+                | #{current_user.you.html_safe}: / #{link_to 'Sign out', destroy_user_session_path, method: :delete}
 
-						- unless current_user
-							div[class="to-left"]
-								= link_to 'Sign in', new_user_session_path
-						- else
-							div[class="to-left"]
-								| #{current_user.you.html_safe}: / #{link_to 'Sign out', destroy_user_session_path, method: :delete}
-	      
-		
-		div[class="container"]
-			div[class="row"]
-				div[class="span12 voffset4"]
-					div
-									
-					- if session[:master_key]
-						div[class="voffset4"]
-							div[class="to-left"]
-								= link_to "New Password", new_credential_path, class: 'btn btn-primary'
-							div[class="to-left" style="margin-left: 40px;"]
-								= form_tag nil, id: "sugg_form", method: :get
-									= text_field_tag :q, params[:q], placeholder: "search entries..."
+            - unless session[:master_key]
+              div[class="to-left"]
+                b
+                  = '2)&nbsp;'.html_safe unless current_user
+                  = link_to 'Load Master Key', key_path
+
+        
+    
+    div[class="container"]
+      div[class="row"]
+        div[class="span12 voffset4"]
+          div
+                  
+          - if session[:master_key]
+            div[class="voffset4"]
+              div[class="to-left"]
+                = link_to "New Password Entry", new_credential_path, class: 'btn btn-primary'
+              div[class="to-left" style="margin-left: 40px;"]
+                = form_tag nil, id: "sugg_form", method: :get
+                  = text_field_tag :q, params[:q], placeholder: "search entries..."
 
 
-				div[class="to-left span12 data"]
-					div[class="voffset4"]
-						div
-							p[class="notice"]
-						   		= notice
-							p[class="notice"]
-								= alert
+        div[class="to-left span12 data"]
+          div[class="voffset4"]
+            div
+              p[class="notice"]
+                   = notice
+              p[class="notice"]
+                = alert
 
-					= yield
+          = yield
 
-			- if current_user and session[:master_key]
-				div[class="row"]
-					div[class="span12 footer"]
-						div
-							= Category.all.map {|c| link_to(c.title, category_path(c))}.join(' | ').html_safe
-						div[class="margin"]
-							= render '/shared/guide'
-						
+      - if current_user and session[:master_key]
+        div[class="row"]
+          div[class="span12 footer"]
+            div
+              = Category.all.map {|c| link_to(c.title, category_path(c))}.join(' | ').html_safe
+            div[class="margin"]
+              = render '/shared/guide'
+            
 
 

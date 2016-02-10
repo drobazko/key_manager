@@ -15,18 +15,18 @@
  */
 
 @media (min-width: 1200px) {
-	body {padding-bottom: 100px;}
-	.container {
-		width: 1170px;
-	}
+  body {padding-bottom: 100px;}
+  .container {
+    width: 1170px;
+  }
 }
 
 ul { list-style-type: none; margin: 0px;}
 
 header {
-	color: #F0F0F0;
-	background: #00518F;
-	padding: 10px 10px;
+  color: #F0F0F0;
+  background: #00518F;
+  padding: 10px 10px;
 }
 
 .clear-float { overflow: auto; }
@@ -36,8 +36,8 @@ header {
 .clear { clear: both }
 
 .notice {
-	color: blue;
-	font-weight: bold;
+  color: blue;
+  font-weight: bold;
 }
 
 .drop-box { width: 500px; }
@@ -86,13 +86,13 @@ nav ul {
 }
 
 .menu a:hover {
-	background-color: #C5D9EB;
+  background-color: #C5D9EB;
 }
 
 .border-row { border-bottom: 2px solid #ccc; }
 
 
-.autocomplete-w1 { background:url(img/shadow.png) no-repeat bottom right; position:absolute; top:0px; left:0px; margin:6px 0 0 6px; /* IE6 fix: */ _background:none; _margin:1px 0 0 0; } 
+.autocomplete-w1 { background:url(/assets/shadow.png) no-repeat bottom right; position:absolute; top:0px; left:0px; margin:6px 0 0 6px; /* IE6 fix: */ _background:none; _margin:1px 0 0 0; } 
 .autocomplete { border:1px solid #999; background:#FFF; cursor:default; text-align:left; max-height:350px; overflow:auto; margin:-6px 6px 6px -6px; /* IE6 specific: */ _height:350px;  _margin:0; _overflow-x:hidden; } 
 .autocomplete .selected { background:#F0F0F0; } 
 .autocomplete div { padding:2px 5px; white-space:nowrap; overflow:hidden; } 
@@ -140,3 +140,13 @@ a.app-menu-selected {
 .footer { margin-top: 60px; border-top: 2 px solid #ccc; }
 
 .margin > div { margin-right: 5px;}
+
+#error_explanation { margin-bottom: 30px; }
+
+.new_user {
+  i { display: block; }
+  br { display: none; }
+}
+
+a.logo:hover { text-decoration: none; }
+

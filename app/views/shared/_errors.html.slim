@@ -1,9 +1,9 @@
 - if entity.errors.any?
-	div[class="errors"]
-		h2
-			= pluralize(entity.errors.count, "error")
+  div[class="errors"]
+    h2
+      = pluralize(entity.errors.count, "error")
 
-		ul
-			- entity.errors.full_messages.each do |msg|
-				li
-					= msg
+    ul
+      - entity.errors.full_messages.each do |msg|
+        li
+          = msg
